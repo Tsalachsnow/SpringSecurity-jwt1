@@ -1,6 +1,7 @@
 package com.example.springsecurityjwt;
 
 import com.example.springsecurityjwt.model.AuthenticationRequest;
+import com.example.springsecurityjwt.model.AuthenticationResponse;
 import com.example.springsecurityjwt.service.MyUserDetailsService;
 import com.example.springsecurityjwt.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class HelloResource {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt =  jwtTokenUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
         }
 
     }
